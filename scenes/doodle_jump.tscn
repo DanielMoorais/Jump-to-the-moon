@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/actors/player1.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/platforms/platform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/game.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 90, 6.5 )
+
+[node name="doodle_jump" type="Node2D"]
+script = ExtResource( 3 )
+platformScene = ExtResource( 2 )
+
+[node name="platformContainer" type="Node2D" parent="."]
+
+[node name="platform" parent="platformContainer" instance=ExtResource( 2 )]
+position = Vector2( 90, 300 )
+
+[node name="player1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 90, 160 )
+
+[node name="camera" type="Camera2D" parent="."]
+position = Vector2( 90, 160 )
+current = true
+
+[node name="platformCleaner" type="Area2D" parent="camera"]
+
+[node name="collision" type="CollisionShape2D" parent="camera/platformCleaner"]
+position = Vector2( 0, 168 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="camera/platformCleaner" to="." method="_on_platformCleaner_body_entered"]
