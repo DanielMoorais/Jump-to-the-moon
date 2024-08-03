@@ -1,20 +1,29 @@
 extends Node2D
 
 onready var platformContainer := $platformContainer
-onready var platformInicialPositionY = $platformContainer/platform.position.y
+onready var platformInicialPositionY = $platformContainer/blockPlatform.position.y
 onready var camera:=$camera as Camera2D
 onready var player:= $player1 as KinematicBody2D
 
-export (PackedScene) var platformScene
+export (Array, PackedScene) var platformScene
 
 func LevelGenerator(amount):
 	for itens in amount:
+		var newPlatform
+		var newType = randi() % 3
 		platformInicialPositionY -= rand_range(36, 70)
 		var platformPositionX = rand_range(20,160)
-		var newPlatform = platformScene.instance() as StaticBody2D
+		
+		if newType == 0:
+			newPlatform = platformScene[0].instance() as StaticBody2D
+		elif newType == 1:
+			newPlatform = platformScene[1].instance() as StaticBody2D
+		elif newType == 2:
+			newPlatform = platformScene[2].instance() as StaticBody2D
 
-		newPlatform.position = Vector2(platformPositionX, platformInicialPositionY)
-		platformContainer.call_deferred("add_child",newPlatform)
+		if newType != 0:
+			newPlatform.position = Vector2(platformPositionX, platformInicialPositionY)
+			platformContainer.call_deferred("add_child",newPlatform)
 
 func _ready() ->void:
 	randomize()
@@ -24,7 +33,6 @@ func _physics_process(delta):
 	if player.position.y < camera.position.y:
 		camera.position.y = player.position.y
 		
-
 
 func _on_platformCleaner_body_entered(body):
 	body.queue_free()
