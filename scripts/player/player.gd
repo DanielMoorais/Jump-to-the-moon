@@ -30,7 +30,9 @@ func move(delta):
 		
 	#colisão e pulo
 	if collision:
-		velocity.y = -jumpForce
+		velocity.y = -jumpForce * collision.collider.jumpForce
+		if collision.collider.has_method("response"):
+			collision.collider.response()
 		
 func _physics_process(delta: float) ->void:
 	move(delta)

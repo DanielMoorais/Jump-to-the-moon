@@ -16,7 +16,7 @@ platformScene = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ) ]
 [node name="platformContainer" type="Node2D" parent="."]
 
 [node name="blockPlatform" parent="platformContainer" instance=ExtResource( 2 )]
-position = Vector2( 90, 300 )
+position = Vector2( 90, 290 )
 
 [node name="player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 90, 160 )
