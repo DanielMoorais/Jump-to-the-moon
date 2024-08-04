@@ -10,25 +10,24 @@ export (Array, PackedScene) var platformScene
 func LevelGenerator(amount):
 	for itens in amount:
 		var newPlatform
-		var newType = randi() % 3
-		platformInicialPositionY -= rand_range(36, 54)
+		var randNumber = randi() % 100
+		platformInicialPositionY -= rand_range(60, 100)
 		var platformPositionX = rand_range(30,150)
 		
-		if newType == 0:
+		if randNumber < 70:
 			newPlatform = platformScene[0].instance() as StaticBody2D
-		elif newType == 1:
+		elif randNumber < 90:
 			newPlatform = platformScene[1].instance() as StaticBody2D
 			newPlatform.connect("deleteObject",self, "deleteObject")
-		elif newType == 2:
+		elif randNumber < 100:
 			newPlatform = platformScene[2].instance() as StaticBody2D
 			
-		if newType != 0:
-			newPlatform.position = Vector2(platformPositionX, platformInicialPositionY)
-			platformContainer.call_deferred("add_child",newPlatform)
+		newPlatform.position = Vector2(platformPositionX, platformInicialPositionY)
+		platformContainer.call_deferred("add_child",newPlatform)
 
 func _ready() ->void:
 	randomize()
-	LevelGenerator(20)
+	LevelGenerator(15)
 	
 func _physics_process(delta):
 	if player.position.y < camera.position.y:

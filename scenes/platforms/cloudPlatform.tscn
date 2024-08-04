@@ -9,7 +9,7 @@ extents = Vector2( 16, 5 )
 
 [node name="cloudPlatform" type="StaticBody2D"]
 script = ExtResource( 3 )
-jumpForce = 1.2
+jumpForce = 1.1
 
 [node name="leftCloud" type="Sprite" parent="."]
 position = Vector2( -9, 0 )
