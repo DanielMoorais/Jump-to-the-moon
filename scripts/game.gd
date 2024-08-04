@@ -32,11 +32,17 @@ func _ready() ->void:
 func _physics_process(delta):
 	if player.position.y < camera.position.y:
 		camera.position.y = player.position.y
-		
+	
 func deleteObject(obstacle):
+	
 	obstacle.queue_free()
 	LevelGenerator(1)
 	
 func _on_platformCleaner_body_entered(body):
-	body.queue_free()
-	LevelGenerator(1)
+	if body == player:
+		if get_tree().change_scene("res://scenes/title-screen.tscn") != OK:
+			print("Error")
+	else:
+		body.queue_free()
+		LevelGenerator(1)
+
