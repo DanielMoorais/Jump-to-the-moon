@@ -7,7 +7,7 @@ onready var player:= $player1 as KinematicBody2D
 onready var score_label := $camera/score as Label
 onready var camera_start_position = $camera.position.y
 
-var score = 0
+var score := 0
 
 export (Array, PackedScene) var platformScene
 
@@ -45,6 +45,8 @@ func deleteObject(obstacle):
 	
 func _on_platformCleaner_body_entered(body):
 	if body == player:
+		if score > Global.highscore:
+			Global.highscore = score
 		if get_tree().change_scene("res://scenes/title-screen.tscn") != OK:
 			print("Error")
 	else:

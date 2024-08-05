@@ -7,13 +7,18 @@ extends Control
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+#func _ready():
+#	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+onready var highscore := $main/highscore as Label
+
+func _ready () -> void:
+	highscore.text = "Highscore\n" + str(Global.highscore)
 
 
 func _on_startbtn_pressed():
