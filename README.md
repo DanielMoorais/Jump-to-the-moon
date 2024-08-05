@@ -8,5 +8,5 @@ Jump to the Moon é um jogo inspirado no clássico "Doodle Jump", onde o objetiv
 
 # Instalação
 
-**Jump to the moon funciona na Godot 3.3.x to 3.5.x**
+**Jump to the moon funciona na Godot 3.3.x to 3.5.x.**
 
