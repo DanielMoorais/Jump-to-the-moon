@@ -4,6 +4,10 @@ onready var platformContainer := $platformContainer
 onready var platformInicialPositionY = $platformContainer/blockPlatform.position.y
 onready var camera:=$camera as Camera2D
 onready var player:= $player1 as KinematicBody2D
+onready var score_label := $camera/score as Label
+onready var camera_start_position = $camera.position.y
+
+var score = 0
 
 export (Array, PackedScene) var platformScene
 
@@ -32,6 +36,7 @@ func _ready() ->void:
 func _physics_process(delta):
 	if player.position.y < camera.position.y:
 		camera.position.y = player.position.y
+	score_update()
 	
 func deleteObject(obstacle):
 	
@@ -46,3 +51,6 @@ func _on_platformCleaner_body_entered(body):
 		body.queue_free()
 		LevelGenerator(1)
 
+func score_update():
+	score = camera_start_position - camera.position.y
+	score_label.text = str(int(score))
