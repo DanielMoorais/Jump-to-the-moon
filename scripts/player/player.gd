@@ -8,7 +8,7 @@ var weight:= 0.5
 
 onready var animation:= $animation as AnimatedSprite
 onready var screenSize:= get_viewport_rect().size
-
+onready var bounce_fx = $bounce_fx as AudioStreamPlayer
 #movimento
 func move(delta):
 	velocity.y += GRAVITY
@@ -33,6 +33,7 @@ func move(delta):
 		velocity.y = -jumpForce * collision.collider.jumpForce
 		if collision.collider.has_method("response"):
 			collision.collider.response()
+		bounce_fx.play()
 		
 func _physics_process(delta: float) ->void:
 	move(delta)

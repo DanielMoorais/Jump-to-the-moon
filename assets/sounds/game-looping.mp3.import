@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/game-looping.mp3-db0ad4c1fe8d790b859bdd84ad06192b.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/game-looping.mp3"
+dest_files=[ "res://.import/game-looping.mp3-db0ad4c1fe8d790b859bdd84ad06192b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
