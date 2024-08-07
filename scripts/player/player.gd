@@ -33,6 +33,7 @@ func move(delta):
 		velocity.y = -jumpForce * collision.collider.jumpForce
 		if collision.collider.has_method("response"):
 			collision.collider.response()
+		bounce_fx.pitch_scale = rand_range(0.8, 1.2)
 		bounce_fx.play()
 		
 func _physics_process(delta: float) ->void:

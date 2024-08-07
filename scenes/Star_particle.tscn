@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/tiles/tile_0157.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Star_particle.gd" type="Script" id=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 0.35
+emission_shape = 2
+emission_box_extents = Vector3( 120, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 15.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+initial_velocity_random = 0.15
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.6
+scale_random = 0.5
+color = Color( 0.929412, 0.933333, 0.768627, 1 )
+hue_variation = -0.16
+hue_variation_random = 0.85
+
+[node name="Star_particle" type="Particles2D"]
+amount = 30
+lifetime = 15.0
+process_material = SubResource( 1 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/actors/player1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/platforms/blockPlatform.tscn" type="PackedScene" id=2]
@@ -7,9 +7,8 @@
 [ext_resource path="res://scenes/platforms/springPlatform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/fonts/Kenney Pixel.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/sounds/game-looping.mp3" type="AudioStream" id=7]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 90, 6.5 )
+[ext_resource path="res://scenes/GradienteControl.gd" type="Script" id=8]
+[ext_resource path="res://scenes/Star_particle.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=2]
 size = 32
@@ -17,9 +16,65 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 90, 6.5 )
+
 [node name="doodle_jump" type="Node2D"]
 script = ExtResource( 3 )
 platformScene = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ) ]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="score" type="Label" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_top = 15.0
+margin_right = 20.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+align = 1
+
+[node name="camera" type="Camera2D" parent="."]
+position = Vector2( 90, 160 )
+current = true
+
+[node name="Control" type="Control" parent="camera"]
+margin_left = -90.0
+margin_top = -160.0
+margin_right = 94.0
+margin_bottom = 192.0
+script = ExtResource( 8 )
+input_start = 1000
+input_end = 10000
+
+[node name="Background_preto" type="ColorRect" parent="camera/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -7.0
+margin_top = -10.0
+margin_right = 4.0
+margin_bottom = -4.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Star_particle" parent="camera/Control" instance=ExtResource( 9 )]
+position = Vector2( 89, -18 )
+
+[node name="Background_azul" type="ColorRect" parent="camera/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -7.0
+margin_top = -10.0
+margin_right = 4.0
+margin_bottom = -4.0
+color = Color( 0.376471, 0.752941, 0.976471, 1 )
+
+[node name="platformCleaner" type="Area2D" parent="camera"]
+
+[node name="collision" type="CollisionShape2D" parent="camera/platformCleaner"]
+position = Vector2( 0, 168 )
+shape = SubResource( 1 )
 
 [node name="platformContainer" type="Node2D" parent="."]
 
@@ -28,27 +83,6 @@ position = Vector2( 90, 290 )
 
 [node name="player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 90, 160 )
-
-[node name="camera" type="Camera2D" parent="."]
-position = Vector2( 90, 160 )
-current = true
-
-[node name="platformCleaner" type="Area2D" parent="camera"]
-
-[node name="collision" type="CollisionShape2D" parent="camera/platformCleaner"]
-position = Vector2( 0, 168 )
-shape = SubResource( 1 )
-
-[node name="score" type="Label" parent="camera"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -20.0
-margin_top = -145.0
-margin_right = 20.0
-margin_bottom = -131.0
-custom_fonts/font = SubResource( 2 )
-text = "0"
-align = 1
 
 [node name="bg_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )

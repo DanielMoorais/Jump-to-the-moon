@@ -4,8 +4,8 @@ onready var platformContainer := $platformContainer
 onready var platformInicialPositionY = $platformContainer/blockPlatform.position.y
 onready var camera:=$camera as Camera2D
 onready var player:= $player1 as KinematicBody2D
-onready var score_label := $camera/score as Label
 onready var camera_start_position = $camera.position.y
+onready var score_label := $CanvasLayer/score
 
 var score := 0
 
